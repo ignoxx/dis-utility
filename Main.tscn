@@ -1,0 +1,275 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Item.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1396.0
+margin_bottom = 896.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HistoryPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 892.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HistoryPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Items" type="Tabs" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer"]
+margin_right = 190.0
+margin_bottom = 22.0
+
+[node name="BtnAddItem" type="Button" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 22.0
+text = "New"
+
+[node name="BtnLoadSelected" type="Button" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer/HBoxContainer"]
+margin_left = 44.0
+margin_right = 190.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+disabled = true
+text = "Load selected"
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer"]
+margin_top = 26.0
+margin_right = 190.0
+margin_bottom = 858.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+margin_left = 204.0
+margin_right = 1188.0
+margin_bottom = 892.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/ObjectPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" parent="MarginContainer/HBoxContainer/ObjectPanel" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -466.0
+margin_top = -432.0
+margin_right = 466.0
+margin_bottom = 432.0
+
+[node name="ToolPanel" type="Control" parent="MarginContainer/HBoxContainer"]
+margin_left = 1192.0
+margin_right = 1392.0
+margin_bottom = 892.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="TabContainer2" type="TabContainer" parent="MarginContainer/HBoxContainer/ToolPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inspector" type="Tabs" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer"]
+margin_right = 190.0
+margin_bottom = 22.0
+
+[node name="LblFrameText" type="Label" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer2"]
+margin_right = 93.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Frame:"
+align = 2
+
+[node name="LblFrameNum" type="Label" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer2"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "10/32"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer"]
+margin_top = 26.0
+margin_right = 190.0
+margin_bottom = 48.0
+
+[node name="BtnPrevFrame" type="Button" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer"]
+margin_right = 93.0
+margin_bottom = 22.0
+focus_mode = 0
+size_flags_horizontal = 3
+text = "<"
+
+[node name="BtnNextFrame" type="Button" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 22.0
+focus_mode = 0
+size_flags_horizontal = 3
+text = ">"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer"]
+margin_top = 52.0
+margin_right = 190.0
+margin_bottom = 74.0
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer3"]
+margin_right = 190.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Add new point"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -344.5
+margin_top = -191.5
+margin_right = 344.5
+margin_bottom = 191.5
+popup_exclusive = true
+window_title = "Open File(s)"
+resizable = true
+mode = 1
+access = 2
+filters = PoolStringArray( "*png" )
+current_dir = "/mnt/data/ignas/Projects/dis-utility"
+current_path = "/mnt/data/ignas/Projects/dis-utility/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WindowDialog" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.5
+margin_top = -64.0
+margin_right = 170.5
+margin_bottom = 64.0
+popup_exclusive = true
+window_title = "Enter Item name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="WindowDialog"]
+margin_left = 10.0
+margin_top = 13.0
+margin_right = 330.0
+margin_bottom = 61.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="WindowDialog/HBoxContainer"]
+margin_right = 320.0
+margin_bottom = 22.0
+text = "Enter a unique item name:"
+
+[node name="TxtItemName" type="LineEdit" parent="WindowDialog/HBoxContainer"]
+margin_top = 26.0
+margin_right = 320.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+placeholder_text = "Item name.."
+caret_blink = true
+
+[node name="Button" type="Button" parent="WindowDialog"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -64.5
+margin_top = -33.1924
+margin_right = 64.5
+margin_bottom = -9.19241
+text = "Confirm"
+[connection signal="pressed" from="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer/HBoxContainer/BtnAddItem" to="." method="_on_BtnAddItem_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer/HBoxContainer/BtnLoadSelected" to="." method="_on_BtnLoadSelected_pressed"]
+[connection signal="item_selected" from="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Items/VBoxContainer/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer/BtnPrevFrame" to="." method="_on_BtnPrevFrame_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer/BtnNextFrame" to="." method="_on_BtnNextFrame_pressed"]
+[connection signal="files_selected" from="FileDialog" to="." method="_on_FileDialog_files_selected"]
+[connection signal="pressed" from="WindowDialog/Button" to="." method="_on_Button_pressed"]
