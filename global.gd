@@ -124,24 +124,25 @@ func update_points_in_item(item_name: String, frame: String, points_data: Dictio
 
 	item_data_save()
 
-# FINSIH THIS
 func generate_code_for_item(item_name: String) -> String:
-	var output: String = ""
-	var item_frames = null
-	for item in item_data["items"]:
-		if item["name"] == item_name:
-			item_frames = item["frames"]
-			break
+	var frame_line_template = "if (argument0.image_index == %s) { fx = %s; fy = %s;}\n" # frame number, x, y
 
-	for frame in item_frames:
-		for point in item_frames[frame]["points"]:
-			output += "%s \n" % point["name"]
-			output += "------------ \n"
-			for ppoint in item_frames[frame]["points"]:
-				if ppoint["name"] == point["name"]:
-					output += "frame: %s \n" % frame
-					output += "x = %s \n" % ppoint["x"]
-					output += "y = %s \n" % ppoint["y"]
+	var output: String = "// -------------- %s -------------- \n" % item_name
+	var points_output: Dictionary = {}
 
-			output += "\n\n"
+	var item = get_item_by_name(item_name)
+
+	if not item:
+		return ""
+
+	for frame in range(item["frames"].size()):
+		if item["frames"][str(frame)].has("points"):
+			for point in item["frames"][str(frame)]["points"]:
+				if not points_output.has(point["name"]):
+					points_output[point["name"]] = ""
+				points_output[point["name"]] += frame_line_template % [frame, point["x"], point["y"]]
+
+	for o in points_output:
+		output += "\n// -------- points for %s --------\n" % o
+		output += points_output[o]
 	return output

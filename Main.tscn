@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Theme/main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Item.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://RichTextLabel.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -239,7 +240,7 @@ size_flags_vertical = 3
 margin_right = 190.0
 margin_bottom = 772.0
 size_flags_vertical = 3
-text = "sdef"
+text = "No point selected"
 readonly = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
@@ -403,17 +404,19 @@ text = "Code output for <item-name>"
 align = 1
 valign = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PopupCode/VBoxContainer"]
+[node name="RichTextLabel" type="TextEdit" parent="PopupCode/VBoxContainer"]
 margin_top = 26.0
 margin_right = 887.0
 margin_bottom = 663.0
-focus_mode = 2
 size_flags_vertical = 3
 custom_colors/selection_color = Color( 0.419608, 0.419608, 0.419608, 0.780392 )
-selection_enabled = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+syntax_highlighting = true
+show_line_numbers = true
+highlight_all_occurrences = true
+virtual_keyboard_enabled = false
+smooth_scrolling = true
+caret_blink = true
+script = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupCode/VBoxContainer"]
 margin_top = 667.0

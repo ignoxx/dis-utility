@@ -157,7 +157,6 @@ func _on_PopupMenu_about_to_show() -> void:
 
 func _on_PopupMenu_index_pressed(index: int) -> void:
 	if index == 0: # Generate Code
-		print("generate code")
 		var output = global.generate_code_for_item(
 			item_list.get_item_text(selected_index)
 		)
