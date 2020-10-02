@@ -87,6 +87,9 @@ func _on_ItemList_item_rmb_selected(index: int, at_position: Vector2) -> void:
 	$PopupMenu.show()
 
 func _on_BtnAddPoint_pressed() -> void:
+	if not item.current_item:
+		return
+
 	$PointDialog/HBoxContainer/TxtItemName.text = ""
 	$PointDialog.show()
 

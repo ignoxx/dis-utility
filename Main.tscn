@@ -96,6 +96,46 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Help" type="Tabs" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 29.0
+margin_right = -155.0
+margin_bottom = -839.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TxtHelp" type="RichTextLabel" parent="MarginContainer/HBoxContainer/HistoryPanel/TabContainer/Help"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "-- How to add a new Ship (Item): --
+
+1. Click \"New\".
+
+2. Popup appears, enter the name of the Item and confirm.
+
+3. Now a file explorer appears, locate the folder with the ship PNG(!!) sprites and select ALL images of the Ship. (Select them in the right order).
+Confirm by opening them.
+
+4. Now your item should appear in the left list, click on it and press the \"Load selected\" button.
+
+5. Your Item should be drawn in the middle now, if not something went wrong =)
+
+
+-- How to generate code --
+
+1. Right click on any item in the list
+
+2. Popup should appear, press \"Generate Code\"
+
+3. Now you should see a windows with the code, if not code is inside, it's because you dont have any points
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ObjectPanel" type="Control" parent="MarginContainer/HBoxContainer"]
 margin_left = 204.0
 margin_right = 1188.0
@@ -243,6 +283,42 @@ size_flags_vertical = 3
 text = "No point selected"
 readonly = true
 
+[node name="Help" type="Tabs" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1187.0
+margin_top = 29.0
+margin_right = -1197.0
+margin_bottom = -5.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TxtHelp" type="RichTextLabel" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Help"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "- Use the \"<\" and \">\" buttons to switch between the frames
+
+- You can only add a new Point if you have a item selected and loaded
+
+- Delete function is not implemented yet, so create points wisely =)
+
+
+
+The save file is located here:
+
+Windows: %APPDATA%\\Godot\\
+
+macOS: ~/Library/Application Support/Godot/
+
+Linux: ~/.local/share/godot/
+
+
+So if you want to start clean again, delete the \"item_data.dis\" file and restart the tool"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FileDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -373,7 +449,6 @@ __meta__ = {
 }
 
 [node name="PopupCode" type="Popup" parent="."]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
