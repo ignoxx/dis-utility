@@ -86,10 +86,6 @@ func _on_ItemList_item_rmb_selected(index: int, at_position: Vector2) -> void:
 	$PopupMenu.set_position(get_global_mouse_position() + Vector2(10,0))
 	$PopupMenu.show()
 
-func _on_PopupMenu_index_pressed(index: int) -> void:
-	if index == 0:
-		print("delete")
-
 func _on_BtnAddPoint_pressed() -> void:
 	$PointDialog/HBoxContainer/TxtItemName.text = ""
 	$PointDialog.show()
@@ -150,3 +146,40 @@ func save_frame_points() -> void:
 					"y": child.rect_position.y - item.rect_size.y/2
 				}
 			)
+
+
+func _on_PopupMenu_about_to_show() -> void:
+	print("about to show")
+	$PopupMenu.add_item("Generate Code", 0)
+	$PopupMenu.add_separator()
+	$PopupMenu.add_item("Delete", 1)
+	$PopupMenu.add_item("Cancel", 2)
+
+func _on_PopupMenu_index_pressed(index: int) -> void:
+	if index == 0: # Generate Code
+		print("generate code")
+		var output = global.generate_code_for_item(
+			item_list.get_item_text(selected_index)
+		)
+
+		$PopupCode/VBoxContainer/Label.text = "Generated code for %s" % item_list.get_item_text(selected_index)
+		$PopupCode/VBoxContainer/RichTextLabel.text = output
+		$PopupCode.show()
+
+	elif index == 2: # delete
+		print("delete")
+
+	else:
+		print("cancel")
+
+	$PopupMenu.hide()
+	$PopupMenu.release_focus()
+
+
+func _on_BtnClose_pressed() -> void:
+	$PopupCode.hide()
+	$PopupCode/VBoxContainer/RichTextLabel.text = ""
+
+
+func _on_BtnCopyToClipboard_pressed() -> void:
+	OS.clipboard = $PopupCode/VBoxContainer/RichTextLabel.text

@@ -123,3 +123,25 @@ func update_points_in_item(item_name: String, frame: String, points_data: Dictio
 			item["points"][frame] = points_data
 
 	item_data_save()
+
+# FINSIH THIS
+func generate_code_for_item(item_name: String) -> String:
+	var output: String = ""
+	var item_frames = null
+	for item in item_data["items"]:
+		if item["name"] == item_name:
+			item_frames = item["frames"]
+			break
+
+	for frame in item_frames:
+		for point in item_frames[frame]["points"]:
+			output += "%s \n" % point["name"]
+			output += "------------ \n"
+			for ppoint in item_frames[frame]["points"]:
+				if ppoint["name"] == point["name"]:
+					output += "frame: %s \n" % frame
+					output += "x = %s \n" % ppoint["x"]
+					output += "y = %s \n" % ppoint["y"]
+
+			output += "\n\n"
+	return output
