@@ -36,7 +36,7 @@ func update_frame() -> void:
 	var new_texture = ImageTexture.new()
 	new_texture.create_from_image(
 		global.image_data_load(
-		current_item["frames"][str(current_index)]
+		current_item["frames"][str(current_index)]["img"]
 	))
 
 	$TextureRect.texture = new_texture

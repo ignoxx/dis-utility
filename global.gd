@@ -1,16 +1,18 @@
 extends Node
 
-var item_data: Array setget , get_item_data
+var selected_point: Control
+
+var item_data: Dictionary setget , get_item_data
 var item_data_save_path: String = "user://item_data.dis"
 
 func get_item_by_name(item_name: String) -> Dictionary:
-	for item in item_data:
-		if item["name"] == item_name:
+	for item in item_data["items"]:
+		if item.has("name") and item["name"] == item_name:
 			return item
 
 	return {}
 
-func get_item_data() -> Array:
+func get_item_data() -> Dictionary:
 	if not item_data:
 		item_data = item_data_load()
 
@@ -18,7 +20,7 @@ func get_item_data() -> Array:
 
 func add_new_item(frame_paths: PoolStringArray, data: Dictionary):
 	# check if name already in use
-	for item in item_data:
+	for item in item_data["items"]:
 		if item["name"] == data["name"]:
 			return
 
@@ -28,9 +30,51 @@ func add_new_item(frame_paths: PoolStringArray, data: Dictionary):
 	}
 
 	for i in range(frame_paths.size()):
-		new_item_data["frames"][str(i)] = image_file_load(frame_paths[i])
+		new_item_data["frames"][str(i)] = {"img": image_file_load(frame_paths[i])}
 
-	item_data.append(new_item_data)
+	print(item_data)
+	item_data["items"].append(new_item_data)
+	item_data_save()
+
+func add_new_point(item_name: String, point_name: String) -> void:
+	# check if point already exists
+	for item in item_data["items"]:
+		if item["name"] == item_name:
+			var i = item["frames"]["0"]
+			if i.has("points"):
+				for point in i["points"]:
+					if point.has("name") and point["name"] == point_name:
+						print("point already exists, aborting..")
+						return
+
+	# add new point (initialize)
+	for item in item_data["items"]:
+		if item["name"] == item_name:
+			for i in range(item["frames"].size() - 1):
+				var ii = item["frames"][str(i)]
+				if ii.has("points"):
+					ii["points"].append({
+						"name": point_name,
+						"x": 0,
+						"y": 0
+					})
+				else:
+					ii["points"] = [{
+						"name": point_name,
+						"x": 0,
+						"y": 0
+					}]
+			break
+
+func update_existing_point(item_name: String, point_name: String, frame_number: int, data: Dictionary) -> void:
+	for item in item_data["items"]:
+		if item["name"] == item_name:
+			for i in item["frames"][str(frame_number)]["points"]:
+				if i["name"] == point_name:
+					i["x"] = data["x"]
+					i["y"] = data["y"]
+			break
+
 	item_data_save()
 
 func image_data_load(content: String) -> Image:
@@ -45,17 +89,18 @@ func image_file_load(path: String) -> String:
 	file.close()
 	return content
 
-func item_data_load() -> Array:
+func item_data_load() -> Dictionary:
 	var result = get_file_content(item_data_save_path)
 
-	if result:
-		return JSON.parse(result).get_result()["default"]
-	return []
+	if not result.empty():
+		return JSON.parse(result).get_result()
+	else:
+		return {"items": []}
 
 func item_data_save() -> void:
 	var file = File.new()
 	file.open(item_data_save_path, File.WRITE)
-	file.store_string(JSON.print({"default": item_data}))
+	file.store_string(JSON.print(item_data))
 	file.close()
 
 func get_file_content(path: String) -> String:
@@ -67,6 +112,13 @@ func get_file_content(path: String) -> String:
 		content = file.get_as_text()
 		file.close()
 	else:
-		return "{}"
+		return ""
 
 	return content
+
+func update_points_in_item(item_name: String, frame: String, points_data: Dictionary):
+	for item in get_item_data():
+		if item["name"] == item_name:
+			item["points"][frame] = points_data
+
+	item_data_save()
