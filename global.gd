@@ -50,7 +50,7 @@ func add_new_point(item_name: String, point_name: String) -> void:
 	# add new point (initialize)
 	for item in item_data["items"]:
 		if item["name"] == item_name:
-			for i in range(item["frames"].size() - 1):
+			for i in range(item["frames"].size()):
 				var ii = item["frames"][str(i)]
 				if ii.has("points"):
 					ii["points"].append({
@@ -73,6 +73,7 @@ func update_existing_point(item_name: String, point_name: String, frame_number: 
 				if i["name"] == point_name:
 					i["x"] = data["x"]
 					i["y"] = data["y"]
+					print("updated: %s" % i)
 			break
 
 	item_data_save()

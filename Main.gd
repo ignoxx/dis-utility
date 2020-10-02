@@ -120,7 +120,7 @@ func load_all_points(frame: Array) -> void:
 	for f in frame:
 		var new_point = Point.instance()
 		new_point.point_name = f["name"]
-		new_point.rect_position = Vector2(f["x"], f["y"])
+		new_point.rect_position = Vector2(f["x"], f["y"]) + item.rect_size/2
 		object_panel.add_child(new_point)
 		print("Added: %s" % f)
 
@@ -146,7 +146,7 @@ func save_frame_points() -> void:
 				child.point_name,
 				item.current_index,
 				{
-					"x": child.rect_position.x - item.rect_position.x/2,
-					"y": child.rect_position.y - item.rect_position.y/2
+					"x": child.rect_position.x - item.rect_size.x/2,
+					"y": child.rect_position.y - item.rect_size.y/2
 				}
 			)
