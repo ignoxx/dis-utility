@@ -102,8 +102,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 5.0
 margin_top = 29.0
-margin_right = -155.0
-margin_bottom = -839.0
+margin_right = -5.0
+margin_bottom = -5.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -261,12 +261,12 @@ text = "Delete"
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer"]
 margin_top = 86.0
 margin_right = 190.0
-margin_bottom = 858.0
+margin_bottom = 832.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/ScrollContainer"]
 margin_right = 190.0
-margin_bottom = 772.0
+margin_bottom = 746.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -278,18 +278,23 @@ size_flags_vertical = 3
 
 [node name="PointData" type="TextEdit" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 190.0
-margin_bottom = 772.0
+margin_bottom = 746.0
 size_flags_vertical = 3
 text = "No point selected"
 readonly = true
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer"]
+margin_top = 836.0
+margin_right = 190.0
+margin_bottom = 858.0
 
 [node name="Help" type="Tabs" parent="MarginContainer/HBoxContainer/ToolPanel/TabContainer2"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1187.0
+margin_left = 5.0
 margin_top = 29.0
-margin_right = -1197.0
+margin_right = -5.0
 margin_bottom = -5.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -518,6 +523,7 @@ text = "Close"
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer/BtnPrevFrame" to="." method="_on_BtnPrevFrame_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer/BtnNextFrame" to="." method="_on_BtnNextFrame_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/HBoxContainer3/HBoxContainer/BtnAddPoint" to="." method="_on_BtnAddPoint_pressed"]
+[connection signal="color_changed" from="MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="files_selected" from="FileDialog" to="." method="_on_FileDialog_files_selected"]
 [connection signal="pressed" from="WindowDialog/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="PointDialog/BtnConfirmPointAdd" to="." method="_on_BtnConfirmPointAdd_pressed"]

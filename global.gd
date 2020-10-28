@@ -1,5 +1,7 @@
 extends Node
 
+signal on_color_change(color)
+
 var selected_point: Control
 
 var item_data: Dictionary setget , get_item_data

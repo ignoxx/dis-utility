@@ -9,6 +9,7 @@ onready var lbl_frame = $MarginContainer/HBoxContainer/ToolPanel/TabContainer2/I
 onready var point_list = $MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/ScrollContainer/VBoxContainer/PointList
 onready var object_panel = $MarginContainer/HBoxContainer/ObjectPanel
 onready var point_data = $MarginContainer/HBoxContainer/ToolPanel/TabContainer2/Inspector/VBoxContainer/ScrollContainer/VBoxContainer/PointData
+onready var item_background = $MarginContainer/HBoxContainer/ObjectPanel/ColorRect
 
 var selected_index: int
 
@@ -120,6 +121,7 @@ func load_all_points(frame: Array) -> void:
 		var new_point = Point.instance()
 		new_point.point_name = f["name"]
 		new_point.rect_position = Vector2(f["x"], f["y"]) + item.rect_size/2
+		new_point.modulate = item_background.color.inverted()
 		object_panel.add_child(new_point)
 		print("Added: %s" % f)
 
@@ -185,3 +187,8 @@ func _on_BtnClose_pressed() -> void:
 
 func _on_BtnCopyToClipboard_pressed() -> void:
 	OS.clipboard = $PopupCode/VBoxContainer/RichTextLabel.text
+
+
+func _on_ColorPickerButton_color_changed(color: Color) -> void:
+	$"MarginContainer/HBoxContainer/ObjectPanel/ColorRect".color = color
+	global.emit_signal("on_color_change", color)
